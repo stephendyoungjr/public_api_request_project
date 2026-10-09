@@ -1,21 +1,28 @@
 
 // make code a little cleaner and easier to read, oppossed to having a longer line for 33
 const gallery = document.querySelector("#gallery");
+//close button as variable 
 const closeButton = document.querySelector(".modal-close-btn");
+//modal container as variable 
 const modalContainer = document.querySelector(".modal-container");
+//info inside modal varaible
 const modalInfoContainer = document.querySelector(".modal-info-container");
 let users = [];
 
 //sets modal display to none, hidden
 modalContainer.style.display = "none";
 
-gallery.addEventListener('click',(event)=> {
-    const userCard = event.target.closest('.card');
-    if(!userCard) return;
 
+// Event listener, when gallery is clicked ...
+gallery.addEventListener('click',(event)=> {
+//specifically if usercard is clicked
+    const userCard = event.target.closest('.card');
+    // if userCard is null, ignore
+    if(!userCard) return;
+//pass the user object, using index stored in dataset
     displayUserModal(users[userCard.dataset.index]);
 });
-
+//IF closebutton is clicked, display is gone 
 closeButton.addEventListener('click', () => {
     modalContainer.style.display = "none";
 });
@@ -24,8 +31,9 @@ closeButton.addEventListener('click', () => {
 
 
 
-
+// Display userModal
 function displayUserModal(user){
+    // variable for address format and birthday format 
     const address = `${user.location.street.number} ${user.location.street.name}, ${user.location.city}, ${user.location.state} ${user.location.postcode}`;
     const dobString = user.dob.date;
     const birthday = `${dobString.slice(5, 7)}/${dobString.slice(8, 10)}/${dobString.slice(0, 4)}`;
